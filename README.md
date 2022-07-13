@@ -1,8 +1,5 @@
 # Intelligent and Efficient Pressure Sensing System with Hyper-Dimensional Computing
 
-Intelligent and Efficient Pressure Sensing System with Hyper-Dimensional Computing
-
-
 ## Motivation
 
 Indoor activity recognition for smart homes is enhanced by various sensor techniques and the recent development of machine learning algorithms. Existing pressure sensing systems usually employ a high-resolution but expensive mat, and use computationally intensive models like Convolutional Neural Networks (CNNs). 
