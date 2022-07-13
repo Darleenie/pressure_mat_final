@@ -14,9 +14,9 @@ In this paper, we propose an intelligent pressure sensing system including the h
 
 
 ## Repository overview
-
+```bash
 ├── README.md
-├── data (https://drive.google.com/drive/folders/1UwhnxmbkB4HpsYazrXF_sDSWjpyFHYSP?usp=sharing)
+├── data (download link below)
 │   ├── static
 │   └── time_series
 ├── lib
@@ -30,6 +30,7 @@ In this paper, we propose an intelligent pressure sensing system including the h
     ├── HD_perm.py   
     ├── humoment.py  
     └── humoment_time_series.py
+```
 
 
 ## Running instructions
