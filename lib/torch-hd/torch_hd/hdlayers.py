@@ -28,27 +28,20 @@ class NonLinearPermEncoder(nn.Module):
         self.proj_matrix = nn.Parameter(proj, requires_grad = False)
         
     def forward(self, x, y = None):
-        # print("in x shape", x.shape)#512 3584
         x = self.flat(x)
         x = x.reshape((-1, 7, 512))  # (batch, 7, 512)
 
         nGramHV = torch.zeros((x.shape[0], self.D))  # (512, 10000)
         base_vector = torch.random.uniform(0, 2*math.pi, self.D)
-        # base_matrix = []
         mu = 0.0
         sigma = 1.0
         out = torch.empty(self.D)
-        # for i in range(0, self.D):
-        #     base_matrix.append(np.random.normal(mu, sigma, len(x_frame)))
 
         for frame_id in range(x.shape[1]):#[0...511]
             x_frame = x[:, frame_id, :]  # (batch, 512)
             for elem in x_frame:
                 for i in range(0, self.D):
                     temp = torch.dot(elem, np.random.normal(mu, sigma, len(elem)))
-                    # print("sin", np.sin(temp))
-                    # print("cos", np.cos(temp + base_vector[i]))
-                    # print("val:", np.cos(temp + base_vector[i]) * np.sin(temp))
                     out[i] = torch.cos(temp + base_vector[i]) * np.sin(temp)
                 # print(out)
 
@@ -58,13 +51,9 @@ class NonLinearPermEncoder(nn.Module):
                 elif self.dist == 'normal':
                     out = torch.where(out >= self.mean, 1, -1).type(torch.float)
             
-            #print('out: ', out[0, :100])
-            #print('frame_id: ', frame_id)
             roll_out = torch.roll(out, -frame_id, dims=1)
             nGramHV += roll_out
-            #print('roll_out: ', roll_out[0, :100])
 
-        # print("nGramhV shape", nGramHV.shape) 
         return torch.tensor(nGramHV)
 
 class PermutationEncoder(nn.Module):
@@ -91,7 +80,6 @@ class PermutationEncoder(nn.Module):
         self.proj_matrix = nn.Parameter(proj, requires_grad = False)
         
     def forward(self, x, y = None):
-        # print("in x shape", x.shape)#512 3584
         x = self.flat(x)
         x = x.reshape((-1, 7, 512))  # (batch, 7, 512)
 
@@ -106,13 +94,9 @@ class PermutationEncoder(nn.Module):
                 elif self.dist == 'normal':
                     out = torch.where(out >= self.mean, 1, -1).type(torch.float)
             
-            #print('out: ', out[0, :100])
-            #print('frame_id: ', frame_id)
             roll_out = torch.roll(out, -frame_id, dims=1)
             nGramHV += roll_out
-            #print('roll_out: ', roll_out[0, :100])
 
-        # print("nGramhV shape", nGramHV.shape) 
         return torch.tensor(nGramHV)
 
 
