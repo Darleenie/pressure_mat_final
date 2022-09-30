@@ -113,7 +113,7 @@ def test(model, device, test_loader):
             y_pred_labels += pred.view_as(target)
             y_true_labels += target
 
-        confusion_matrix = metrics.confusion_matrix(y_true=y_true_labels, y_pred=y_pred_labels
+        confusion_matrix = metrics.confusion_matrix(y_true=y_true_labels, y_pred=y_pred_labels)
         print(confusion_matrix)
 
 
